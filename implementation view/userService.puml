@@ -1,4 +1,4 @@
-@startuml
+@startuml UserService
 
 package "User Service" {
     class UserService {
@@ -20,9 +20,24 @@ package "User Service" {
         -decks: List<Deck>
         -wins: int
         -losses: int
+        -mmr: int
         +getId(): String
         +getUsername(): String
+        +setUsername(username: String): void
         +getToken(): String
+        +getWins(): int
+        -setWins(): void
+        +addWin(): void
+        +getLoss(): int
+        -setLoss(): void
+        +addLoss(): void
+        +getCards(): List<Card>
+        -setCards(cards: List<Card>): void
+        +getDecks(): List<Deck>
+        -setDecks(decks: List<Deck>): void
+        +getMmr(): int
+        -setMmr(): void
+        +updateMmr(mmr: int): void
     }
 
     class Card {
@@ -30,12 +45,25 @@ package "User Service" {
         -name: String
         -healthPoints: int
         -power : int
+        -cost : int
         -type: String
         -rarity: String
         +getId(): String
         +getName(): String
-        +getDamage(): float
+        +getHealthPoints(): int
+        -setHealthPoints(): void
+        +getPower(): int
+        -setPower(): void
+        +getCost(): int
+        -setCost(): void
         +getType(): String
+        +getRarity(): String
+        +heal(amount: int): int
+        +takeDamage(amount: int): int
+        +buffPower(amount: int): int
+        +debuffPower(amount: int): int
+        +increaseCost(amount: int): int
+        +decreaseCost(amount: int): int
     }
 
     class Deck {
@@ -43,6 +71,10 @@ package "User Service" {
         -name: String
         -cards: List<Card>
         +getId(): String
+        +getName(): String
+        +setName(name: String): String
+        +getCards(): List<Card>
+        +setCards(cards: List<Card>): List<Card>
     }
 
     UserService --> Card
