@@ -1,0 +1,53 @@
+@startuml
+
+package "User Service" {
+    class UserService {
+        +getUser(id: String, password: String): User
+        +register(user: User, password: String): void
+        +updateUser(token: String, username?: String, password?: String): void
+        +login(username: String, password: String): token
+        +getCards(token: String): List<Card>
+        +getDecks(token: String): List<Deck>
+        +saveCards(token: String, cards: List<Card>): void
+        +saveDecks(token: String, decks: List<Deck>): void
+    }
+
+    class User {
+        -id: int
+        -username: String
+        -token: String
+        -cards: List<Card>
+        -decks: List<Deck>
+        -wins: int
+        -losses: int
+        +getId(): String
+        +getUsername(): String
+        +getToken(): String
+    }
+
+    class Card {
+        -id: int
+        -name: String
+        -healthPoints: int
+        -power : int
+        -type: String
+        -rarity: String
+        +getId(): String
+        +getName(): String
+        +getDamage(): float
+        +getType(): String
+    }
+
+    class Deck {
+        -id: int
+        -name: String
+        -cards: List<Card>
+        +getId(): String
+    }
+
+    UserService --> Card
+    UserService --> User 
+    UserService --> Deck
+}
+
+@enduml
