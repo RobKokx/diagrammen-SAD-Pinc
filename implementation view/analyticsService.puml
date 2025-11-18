@@ -1,0 +1,49 @@
+@startuml
+
+package "AnalyticsService.Services" {
+    class MockAnalyticsService {
+        +record_result(result: GameResult): Map
+        +get_stats(player_id: String): PlayerStats
+        +get_leaderboard(): List<LeaderboardEntry>
+        +get_trends(): TrendData
+    }
+}
+
+package "AnalyticsService.Contracts" {
+    class GameResult {
+        player_id: String
+        opponent_id: String
+        winner: String
+        damage_done: int
+        damage_taken: int
+    }
+
+    class PlayerStats {
+        player_id: String
+        games_played: int
+        wins: int
+        losses: int
+        win_rate: float
+        avg_damage: float
+    }
+
+    class LeaderboardEntry {
+        player_id: String
+        rank: int
+        win_rate: float
+        games_played: int
+    }
+
+    class TrendData {
+        popular_cards: List<String>
+        global_win_rate: float
+        meta_shifts: List<String>
+    }
+}
+
+MockAnalyticsService --> GameResult
+MockAnalyticsService --> PlayerStats
+MockAnalyticsService --> LeaderboardEntry
+MockAnalyticsService --> TrendData
+
+@enduml
