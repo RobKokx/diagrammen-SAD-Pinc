@@ -1,0 +1,28 @@
+@startuml
+
+' Layout instellingen
+top to bottom direction
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+}
+skinparam linetype ortho
+
+interface ITradeService {
+    + requestTrade(fromUserId : int, toUserId : int) : TradeRequest
+    + acceptTrade(tradeRequestId : int) : TradeResult
+    + declineTrade(tradeRequestId : int) : boolean
+    + cancelTrade(tradeRequestId : int) : boolean
+}
+
+class TradeService {
+    + requestTrade(fromUserId : int, toUserId : int) : TradeRequest
+    + acceptTrade(tradeRequestId : int) : TradeResult
+    + declineTrade(tradeRequestId : int) : boolean
+    + cancelTrade(tradeRequestId : int) : boolean
+}
+
+TradeService ..|> ITradeService
+
+@enduml

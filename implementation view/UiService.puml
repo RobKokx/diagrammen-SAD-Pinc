@@ -1,0 +1,151 @@
+@startuml
+skinparam linetype ortho
+
+MainGui --> IScreen
+LoginScreen --> IFormPane
+LoginScreen --> IButtonPane
+
+'registration screen and its components
+RegistrationScreen --> IFormPane
+FormPane --> IInputPane
+RegistrationScreen --> IButtonPane
+
+'battle screen and its phases
+BattleScreen --> DrawPhasePane
+BattleScreen --> AttackPhasePane
+BattleScreen --> PlayCardPhasePane
+BattleScreen --> EndPhasePane
+BattleScreen --> EndBattlePane
+BattleScreen --> BattleCardPane
+
+'Phase panes and their button panes
+DrawPhasePane --> IButtonPane
+AttackPhasePane --> IButtonPane
+PlayCardPhasePane --> IButtonPane
+EndPhasePane --> IButtonPane
+EndBattlePane --> IButtonPane
+
+HubScreen --> IButtonPane
+
+DeckBuildingScreen --> CardPane
+
+class MainGui{
+    void showScreen(IScreen screen)
+    void closeScreen(IScreen screen)
+}
+
+Interface IScreen{
+    void display()
+    void hide()
+}
+
+class LoginScreen implements IScreen {
+    void display()
+    void hide()
+}
+
+class RegistrationScreen implements IScreen{
+    void display()
+    void hide()
+}
+
+class HubScreen implements IScreen{
+    void display()
+    void hide()
+}
+
+class BattleScreen implements IScreen {
+    void display()
+    void hide()
+}
+
+class DrawPhasePane{
+    void display()
+    void hide()
+}
+
+class AttackPhasePane{
+    void display()
+    void hide()
+}
+
+class PlayCardPhasePane{
+    void display()
+    void hide()
+}
+
+class EndPhasePane{
+    void giveTurnToOpponent()
+}
+
+class EndBattlePane{
+    void display()
+    void hide()
+}
+
+class BattleCardPane {
+    void display()
+    void hide()
+}
+
+class AnalyticsScreen implements IScreen{
+    void display()
+    void hide()
+}
+
+class PersonalAnalyticsScreen extends AnalyticsScreen{
+    void display()
+    void hide()
+}
+
+class GlobalAnalyticsScreen extends AnalyticsScreen{
+    void display()
+    void hide()
+}
+
+class FriendAnalyticsScreen extends AnalyticsScreen{
+    void display()
+    void hide()
+}
+
+class AIScreen implements IScreen{
+    void display()
+    void hide()
+}
+
+class DeckBuildingScreen implements IScreen{
+    void display()
+    void hide()
+}
+
+class CardPane{
+    void display()
+    void hide()
+}
+
+interface IFormPane{
+    void makeForm()
+}
+
+class FormPane implements IFormPane{
+    void makeForm()
+}
+
+interface IInputPane{
+    void makeInput(int x, int y, height, width)
+}
+
+class InputPane implements IInputPane{
+    void makeInput(int x, int y, height, width)
+}
+
+interface IButtonPane{
+    void makeButton(int x, int y, height, width, color, name)
+}
+
+class ButtonPane implements IButtonPane{
+    void makeButton(int x, int y, height, width, color, name)
+}
+
+
+@enduml

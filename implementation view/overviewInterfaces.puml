@@ -1,0 +1,22 @@
+@startuml
+
+package Client{
+class "Project42" as client
+}
+
+interface "ICardCollectionService" as CCS{}
+interface "IUserService" as US{}
+interface "IAnalyzeService" as AS{}
+interface "IAiService" as AiS{}
+interface "IMatchmakerService" as MS{}
+interface "IBattleEngineService" as BES{}
+
+client --> CCS
+client --> US
+client --> AS
+client --> AiS
+client --> MS
+client --> BES
+
+
+@enduml
