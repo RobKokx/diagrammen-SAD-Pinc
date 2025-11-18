@@ -1,0 +1,63 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface IBattleEngine
+
+class BattleEngineService {
+-BattleEngine battleEngine
+-ArrayList<User> users
++ArrayList<Player> initializePlayers(ArrayList<User> users)
+'Binnen findmatch worden de speler klasse gemaakt op basis van de users
++StartMatch(ArrayList<Player> players)
+}
+
+class BattleEngine {
+-Player player1
+-Player player2
++void turnTracker()
++void playTurn(Player player)
+}
+
+class Player {
+'Heeft deck nodig en een user nodig
+-User user
+-int existence
+-int energy
+-Queue<Card> deck
+-ArrayList<Card> hand
++void shuffleDeck()
+}
+
+class Turn {
+-Player currentPlayer
++void playPhases(Player currentPlayer)
+}
+
+abstract class Phase {
+-Player currentPlayer
++void {abstract} executePhase()
++Phase nextPhase()
+}
+
+class Draw implements Phase {
++Card drawcard()
+}
+class Play implements Phase {
++void playCard()
+}
+class Attack implements Phase {
++void attack()
++void calculateDamage()
++void applyDamage()
+}
+class End implements Phase {
++void endTurn()
+}
+
+IBattleEngine <|.. BattleEngineService
+BattleEngineService --> BattleEngine
+BattleEngineService --> Player
+BattleEngine --> Turn
+Turn --> Phase
+
+@enduml

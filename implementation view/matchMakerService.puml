@@ -1,0 +1,14 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface IMatchmaker
+
+class MatchmakerService {
+-Queue<User> userQueue
++void addToQueue(User user)
++ArrayList<Player> findMatch(Queue<User> userQueue)
+'Wanneer een user praat met de matchmakerservice wordt die user in de queue geplaatst
+}
+
+IMatchmaker <|.. MatchmakerService
+@enduml
