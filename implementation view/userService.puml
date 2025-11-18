@@ -21,22 +21,8 @@ package "User Service" {
         -wins: int
         -losses: int
         -mmr: int
-        +getId(): String
-        +getUsername(): String
-        +setUsername(username: String): void
-        +getToken(): String
-        +getWins(): int
-        -setWins(): void
         +addWin(): void
-        +getLoss(): int
-        -setLoss(): void
         +addLoss(): void
-        +getCards(): List<Card>
-        -setCards(cards: List<Card>): void
-        +getDecks(): List<Deck>
-        -setDecks(decks: List<Deck>): void
-        +getMmr(): int
-        -setMmr(): void
         +updateMmr(mmr: int): void
     }
 
@@ -44,20 +30,10 @@ package "User Service" {
         -id: int
         -name: String
         -healthPoints: int
-        -power : int
-        -cost : int
+        -power: int
+        -cost: int
         -type: String
         -rarity: String
-        +getId(): String
-        +getName(): String
-        +getHealthPoints(): int
-        -setHealthPoints(): void
-        +getPower(): int
-        -setPower(): void
-        +getCost(): int
-        -setCost(): void
-        +getType(): String
-        +getRarity(): String
         +heal(amount: int): int
         +takeDamage(amount: int): int
         +buffPower(amount: int): int
@@ -70,15 +46,10 @@ package "User Service" {
         -id: int
         -name: String
         -cards: List<Card>
-        +getId(): String
-        +getName(): String
-        +setName(name: String): String
-        +getCards(): List<Card>
-        +setCards(cards: List<Card>): List<Card>
     }
 
     UserService --> Card
-    UserService --> User 
+    UserService --> User
     UserService --> Deck
 }
 
