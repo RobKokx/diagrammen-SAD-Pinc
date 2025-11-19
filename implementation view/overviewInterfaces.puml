@@ -1,14 +1,22 @@
 @startuml
 
-interface "IUserInterface" as UI{}
+interface "IUserInterface" as UI{
++showScreenState(state : ScreenState) : void
+}
 
 package Client{
-class "Project42" as client
+class "Project42" as client{
+- user
++setLoginScreen() : LoginScreen
++setRegisterScreen() : RegisterScreen
++setHomescreen() : HomeScreen
+
+}
 }
 
 interface "ICardCollectionService" as CCS{}
 interface "IUserService" as US{
-+getUserID(id: String) : User
++getUserID(id: int) : User
 +register(user: User, password: String) : void
 +updateUser(token: String, username? : String, password? : String) : void
 +Login(username : String, password : String) : token
@@ -17,11 +25,33 @@ interface "IUserService" as US{
 +saveCards(userID : int, Cards : List<Card>) : void
 +saveDecks(userID : int, Decks : List<Deck>) : void
 }
-interface "IAnalyzeService" as AS{}
+interface "IAnalyzeService" as AS{
+-LeaderboardState
++get_Stats() : PlayerStats
++get_Leaderboard() : List<LeaderboardEntry>
++get_trends() : TrendData
+}
 interface "IAiService" as AiS{}
-interface "IMatchmakerService" as MS{}
-interface "IBattleEngineService" as BES{}
+interface "IMatchmakerService" as MS{
++addToQueue() : void
+}
+interface "IBattleEngineService" as BES{
+-battleState
++initializePlayers(users : List<User>) : List<Player>
++StartMatch(players : List<Player>) : void
++playCard() : void
++attack() : void
+}
 
+class user{
+ - userID : int
+ - username : String
+ - activeDeck : Deck
+ - personalCardCollection : CardCollection
+ - elo : int
+}
+
+client -> user : |                                                                   /
 client --> CCS
 client --> US
 client --> AS
