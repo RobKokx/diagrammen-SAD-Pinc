@@ -2,14 +2,14 @@
 
 package "User Service" {
     class UserService {
-        +getUser(id: String, password: String): User
-        +register(user: User, password: String): void
-        +updateUser(token: String, username?: String, password?: String): void
-        +login(username: String, password: String): token
-        +getCards(token: String): List<Card>
-        +getDecks(token: String): List<Deck>
-        +saveCards(token: String, cards: List<Card>): void
-        +saveDecks(token: String, decks: List<Deck>): void
+        +getUserByUsername(username: String): ServiceResponse<User>
+        +register(username: String, password: String, passwordConfirm: String): ServiceResponse<User>
+        +updateUser(token: String, username?: String, password?: String, passwordConfirm?: String): ServiceResponse<User>
+        +login(username: String, password: String): ServiceResponse<User>
+        +getCards(token: String): ServiceResponse<List<Card>>
+        +getDecks(token: String): ServiceResponse<List<Deck>>
+        +saveCards(token: String, cards: List<Card>): ServiceResponse<List<Card>>
+        +saveDecks(token: String, deckName: String, cardsInDeck: List<Card>): ServiceResponse<List<Deck>>
     }
 
     class User {
@@ -21,6 +21,9 @@ package "User Service" {
         -wins: int
         -losses: int
         -mmr: int
+        +User(id: int, username: string, wins: int, loss:int, cards:List<Card>?, decks:List<Deck>?, mmr: int)
+        +User(username: string, token: string)
+        +User(username: string)
         +addWin(): void
         +addLoss(): void
         +updateMmr(mmr: int): void
@@ -32,8 +35,10 @@ package "User Service" {
         -healthPoints: int
         -power: int
         -cost: int
-        -type: String
-        -rarity: String
+        -CardTribe: Tribe
+        -CardRarity: Rarity
+        +Card(id: int, name: String, power: int, healthPoints: int, cost: int, tribe: Tribe, rarity: Rarity)
+        +Card(name: String, power: int, healthPoints: int, cost: int, tribe: Tribe, rarity: Rarity)
         +heal(amount: int): int
         +takeDamage(amount: int): int
         +buffPower(amount: int): int
@@ -46,6 +51,8 @@ package "User Service" {
         -id: int
         -name: String
         -cards: List<Card>
+        +Deck(id: int, name: String, cards: List<Card>?)
+        +Deck(name: String, cards: List<Card>?)
     }
 
     UserService --> Card
