@@ -1,0 +1,45 @@
+@startuml
+
+' Layout instellingen
+top to bottom direction
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor White
+    BorderColor Black
+}
+skinparam linetype ortho
+
+interface ICardCollectionService {
+    + getAllPacks() : List<Pack>
+    + getPackById(packId : int) : Pack
+    + getAllCards() : List<Card>
+    + getCardById(id : int) : Card
+    + openPack(packId : int) : List<Card>
+}
+
+class CardCollectionService {
+    - CardCollectionRepository cardCollectionRepository
+    - PackRepository packRepository
+
+    + getAllPacks() : List<Pack>
+    + getPackById(packId : int) : Pack
+    + getAllCards() : List<Card>
+    + getCardById(id : int) : Card
+    + openPack(packId : int) : List<Card>
+}
+
+CardCollectionService ..|> ICardCollectionService
+CardCollectionService --> CardCollectionRepository
+CardCollectionService --> PackRepository
+
+class CardCollectionRepository {
+    + getAllCards() : List<Card>
+    + getCardById(id : int) : Card
+}
+
+class PackRepository {
+    + getAllPacks() : List<Pack>
+    + getPackById(packId : int) : Pack
+}
+
+@enduml

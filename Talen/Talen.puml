@@ -1,10 +1,26 @@
 @startuml
 title Talen van het project
 
+object "User interface service\n<img:Ruby.png>" as UI
+
+object "controller\n<img:CSharp.png>" as cnrl
 
 
-class Client{
-}
+object "cardCollection service\n<img:CSharp.png>" as collserv
+object "user service\n<img:CSharp.png>" as userserv
+object "analytics service\n<img:Elixir.png>" as analyticsserv
+object "AI service\n<img:Python.png>" as aiserv
+object "battle engine service\n<img:Ruby.png>" as battleengserv
+object "Matchmaker Service\n<img:Ruby.png>" as mmServ
+object "trade service\n<img:CSharp.png>" as tradeserv
 
+cnrl --> collserv
+cnrl --> userserv
+cnrl --> analyticsserv
+cnrl --> battleengserv
+cnrl --> tradeserv
+cnrl --> aiserv
+cnrl --> mmServ
+UI <-- cnrl
 
 @enduml
