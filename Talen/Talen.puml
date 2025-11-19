@@ -1,0 +1,10 @@
+@startuml
+title Talen van het project
+
+
+
+class Client{
+}
+
+
+@enduml
