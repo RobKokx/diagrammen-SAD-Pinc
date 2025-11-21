@@ -22,6 +22,10 @@ interface "ICardCollectionService" as CCS{
 +getCardById(cardID : int) : Card
 +getCardById(cardID : List<int>) : List<Card>
 +openpack(pack : Pack) : List<Card>
++getCards(userID : int) : List<Card>
++getDecks(userID : int) : List<Deck>
++saveCards(userID : int, Cards : List<Card>) : void
++saveDecks(userID : int, Decks : List<Deck>) : void
 }
 
 interface "IUserService" as US{
@@ -29,10 +33,6 @@ interface "IUserService" as US{
 +register(user: User, password: String) : void
 +updateUser(token: String, username? : String, password? : String) : void
 +Login(username : String, password : String) : token
-+getCards(userID : int) : List<Card>
-+getDecks(userID : int) : List<Deck>
-+saveCards(userID : int, Cards : List<Card>) : void
-+saveDecks(userID : int, Decks : List<Deck>) : void
 }
 interface "IAnalyzeService" as AS{
 -LeaderboardState
