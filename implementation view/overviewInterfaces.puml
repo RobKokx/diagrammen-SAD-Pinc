@@ -14,7 +14,16 @@ class "Project42" as client{
 }
 }
 
-interface "ICardCollectionService" as CCS{}
+interface "ICardCollectionService" as CCS{
+-changeDeckState
+-openPackSate
+-cardCollectionState
++getPackByName(packName : String) : Pack
++getCardById(cardID : int) : Card
++getCardById(cardID : List<int>) : List<Card>
++openpack(pack : Pack) : List<Card>
+}
+
 interface "IUserService" as US{
 +getUserID(id: int) : User
 +register(user: User, password: String) : void
