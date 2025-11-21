@@ -28,6 +28,10 @@ interface "ICardCollectionService" as CCS{
 +saveDecks(userID : int, Decks : List<Deck>) : void
 }
 
+interface "ITradeService" as TS {
+Iets met 2 kaarten en ruilen met een speler :)
+}
+
 interface "IUserService" as US{
 +getUserID(id: int) : User
 +register(user: User, password: String) : void
@@ -40,7 +44,11 @@ interface "IAnalyzeService" as AS{
 +get_Leaderboard() : List<LeaderboardEntry>
 +get_trends() : TrendData
 }
-interface "IAiService" as AiS{}
+
+interface "IAiService" as AiS{
+SjatJPT
+}
+
 interface "IMatchmakerService" as MS{
 +addToQueue() : void
 }
@@ -67,6 +75,7 @@ client --> AS
 client --> AiS
 client --> MS
 client --> BES
+client --> TS
 UI <-- client
 
 
