@@ -1,0 +1,98 @@
+@startuml
+
+' ========================
+' Packages
+' ========================
+
+package "Client.Domain.Entities" {
+    interface ICard {
+        int Id
+        string Name
+        string Description
+        int Cost
+        string Art
+    }
+
+    class EntityCard {
+        int Id
+        string Name
+        string Description
+        int Cost
+        string Art
+        int Attack
+        int Health
+    }
+
+    class TechnologyCard {
+        int Id
+        string Name
+        string Description
+        int Cost
+        string Art
+        string Effect
+    }
+}
+
+package "Client.Domain.Entities.UiEntities.BattleScreen" {
+    interface InGameCard {
+        int InstanceId
+        int OwnerId
+    }
+
+    class InGameEntityCard {
+        int CurrentAttack
+        int CurrentHealth
+        TemporaryModifier Modifier
+        int InstanceId
+        int OwnerId
+    }
+
+    class InGameTechnologyCard {
+        int InstanceId
+        int OwnerId
+    }
+
+    class InGamePlayer {
+        int UserId
+        List<InGameCard> Hand
+        int Existence
+        int Energy
+        List<InGameCard> Board
+        List<InGameCard> DiscardPile
+        int DeckCount
+    }
+
+    class TemporaryModifier {
+        int SourceId
+        int AttackChange
+        int HealthChange
+        int ExpiresAtTurn
+    }
+
+    class BattleState {
+        int BattleId
+        InGamePlayer Player1
+        InGamePlayer Player2
+    }
+}
+
+' ========================
+' Relationships
+' ========================
+
+ICard <|.. EntityCard
+ICard <|.. TechnologyCard
+
+InGameCard <|.. InGameEntityCard
+InGameCard <|.. InGameTechnologyCard
+
+EntityCard <|-- InGameEntityCard
+TechnologyCard <|-- InGameTechnologyCard
+
+InGameEntityCard --> TemporaryModifier
+
+InGamePlayer "1" --> "0..*" InGameCard : Hand/Board/DiscardPile
+BattleState "1" --> "1" InGamePlayer : Player1
+BattleState "1" --> "1" InGamePlayer : Player2
+
+@enduml
