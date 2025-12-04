@@ -1,18 +1,31 @@
 @startuml
 
-interface "IUserInterface" as UI{
+
+
+package Local{
+Class "UserInterface" as UI{
 +showScreenState(state : ScreenState) : void
 }
-
-package Client{
-class "Project42" as client{
+class "Logic" as client{
 - user
 +setLoginScreen() : LoginScreen
 +setRegisterScreen() : RegisterScreen
 +setHomescreen() : HomeScreen
+}
 
+interface "IAiService" as AiS{
+//Logica over de ai
+}
+
+class "BattleEngineOffline" as OBES{
+-battleState
++initializePlayers(users : List<User>) : List<Player>
++StartMatch(players : List<Player>) : void
++playCard() : void
++attack() : void
 }
 }
+
 
 interface "ICardCollectionService" as CCS{
 -changeDeckState
@@ -29,7 +42,7 @@ interface "ICardCollectionService" as CCS{
 }
 
 interface "ITradeService" as TS {
-Iets met 2 kaarten en ruilen met een speler :)
+//trading logica, is niet nog uitgedacht
 }
 
 interface "IUserService" as US{
@@ -45,10 +58,6 @@ interface "IAnalyzeService" as AS{
 +get_trends() : TrendData
 }
 
-interface "IAiService" as AiS{
-SjatJPT
-}
-
 interface "IMatchmakerService" as MS{
 +addToQueue() : void
 }
@@ -60,23 +69,14 @@ interface "IBattleEngineService" as BES{
 +attack() : void
 }
 
-class user{
- - userID : int
- - username : String
- - activeDeck : Deck
- - personalCardCollection : CardCollection
- - elo : int
-}
-
-client -> user : |                                                                   /
 client --> CCS
 client --> US
 client --> AS
-client --> AiS
+client -> AiS
 client --> MS
 client --> BES
 client --> TS
-UI <-- client
-
+UI --> client
+client -> OBES
 
 @enduml
